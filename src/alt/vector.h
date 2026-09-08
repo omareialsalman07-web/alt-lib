@@ -10,11 +10,15 @@ namespace alt {
 		size_t m_Capacity;
 
 	public:
-		vector(size_t _count = 2)
+		vector()
+		{
+			m_Size = 0;
+			m_Capacity = 0;
+			m_Data = nullptr;
+		}
+		vector(size_t _count)
 		{
 			m_Size = _count;
-			m_Capacity = _count;
-
 			reAlloc(_count);
 		}
 		vector(size_t _count, const T& value)
@@ -134,6 +138,15 @@ namespace alt {
 		}
 
 	private:
-		void grow() { reAlloc(m_Capacity + (m_Capacity / 2)); }
+		void grow()
+		{
+			if (m_Capacity == 0)
+			{
+				reAlloc(2);
+				return;
+			}
+
+			reAlloc(m_Capacity + (m_Capacity / 2));
+		}
 	};
 }

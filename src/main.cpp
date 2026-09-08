@@ -25,13 +25,16 @@ void testVector()
 {
 	alt::vector<int> arr;
 
-	arr.clear();
 
 	arr.push_back(1);
 	arr.push_back(2);
 	arr.push_back(3);
 	arr.push_back(4);
+	//arr.clear();
 	arr.push_back(5);
+
+	//alt::vector<int> arr2 = arr;
+	//arr[2] = 0;
 
 	//arr.reverse();
 	//arr.erase(2);
