@@ -1,15 +1,11 @@
 #include<iostream>
 #include "alt/array.h"
 
-void Print(const alt::array<int, 5>& arr)
+#include "alt/vector.h"
+#include <vector>
+
+void testArray()
 {
-	for (auto x : arr) {
-		std::cout << x << std::endl;
-	}
-}
-
-int main() {
-
 	alt::array<int, 5> arr;
 
 	arr[0] = 1;
@@ -18,14 +14,40 @@ int main() {
 	arr[3] = 4;
 	arr[4] = 5;
 
-	alt::array<int, 5> arr2 = arr;
-	std::cout << "\nArr 2 : \n";
-	Print(arr2);
+	//arr.reverse();
 
-	arr2[2] = 0;
+	for (auto x : arr) {
+		std::cout << x << std::endl;
+	}
+}
 
-	std::cout << "Arr 1 : \n";
-	Print(arr);
+void testVector()
+{
+	alt::vector<int> arr;
+
+	arr.clear();
+
+	arr.push_back(1);
+	arr.push_back(2);
+	arr.push_back(3);
+	arr.push_back(4);
+	arr.push_back(5);
+
+	//arr.reverse();
+	//arr.erase(2);
+
+	for (auto x : arr) {
+		std::cout << x << std::endl;
+	}
+
+	//std::vector<int> v;
+	
+}
+
+int main() {
+
+	//testArray();
+	testVector();
 	
 
 	return 0;

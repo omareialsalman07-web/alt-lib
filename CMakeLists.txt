@@ -19,4 +19,5 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_executable(alt-lib 
     src/main.cpp
     src/alt/array.h
+    src/alt/vector.h
 )
