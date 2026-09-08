@@ -33,17 +33,18 @@ void testVector()
 	//arr.clear();
 	arr.push_back(5);
 
-	//alt::vector<int> arr2 = arr;
-	//arr[2] = 0;
+	alt::vector<int> arr2(2, 5);
+	arr2 = arr;
+	arr[2] = 0;
 
 	//arr.reverse();
 	//arr.erase(2);
 
-	for (auto x : arr) {
+	for (auto x : arr2) {
 		std::cout << x << std::endl;
 	}
 
-	//std::vector<int> v;
+	std::vector<int> v;
 	
 }
 

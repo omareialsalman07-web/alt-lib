@@ -16,7 +16,7 @@ namespace alt {
 			m_Capacity = 0;
 			m_Data = nullptr;
 		}
-		vector(size_t _count)
+		explicit vector(size_t _count)
 		{
 			m_Size = _count;
 			reAlloc(_count);
@@ -32,9 +32,54 @@ namespace alt {
 				m_Data[i] = value;
 			}
 		}
+
+		// Copying
+		vector(const vector<T>& others)
+		{
+			m_Size = others.size();
+			m_Capacity = others.capacity();
+
+			if (others.capacity() == 0)
+				return;
+
+			m_Data = new T[m_Capacity];
+			for (size_t i = 0; i < m_Size; i++)
+			{
+				m_Data[i] = *(others.begin() + i);
+			}
+		}
+		vector<T>& operator=(const vector<T>& others)
+		{
+			if (this == &others)
+				return *this;
+
+			m_Size = others.size();
+			m_Capacity = others.capacity();
+
+			if (others.capacity() == 0)
+			{
+				delete[] m_Data;
+				m_Data = nullptr;
+				return *this;
+			}
+
+			T* prevData = m_Data;
+
+			m_Data = new T[others.capacity()];
+			for (size_t i = 0; i < m_Size; i++)
+			{
+				m_Data[i] = *(others.begin() + i);
+			}
+
+			delete[] prevData;
+
+			return *this;
+		}
+
 		~vector()
 		{
 			delete[] m_Data;
+			m_Data = nullptr;
 		}
 
 		void reAlloc(size_t newCapacity)
@@ -46,7 +91,7 @@ namespace alt {
 
 			T* prevData = m_Data;
 
-			m_Data = new T[newCapacity];
+			m_Data = new T[newCapacity]();
 			if (prevData == nullptr)
 				return;
 
@@ -94,18 +139,18 @@ namespace alt {
 			--m_Size;
 		}
 
-		T* erase(size_t index)
+		T* erase(T* _data)
 		{
-			if(index >= m_Size)
+			if(_data < begin() || _data >= end())
 				throw std::out_of_range("array index out of range");
 
-			for (size_t i = index; i < m_Size - 1; i++)
+			for (T* it = _data; it != (end() - 1); ++it)
 			{
-				m_Data[i] = m_Data[i + 1];
+				*it = *(it + 1);
 			}
 
 			--m_Size;
-			return  m_Data + index;
+			return  _data;
 		}
 
 
